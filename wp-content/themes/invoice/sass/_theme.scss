@@ -1,11 +1,19 @@
+@import './utilities/spacing';
 $primary-color: #191919;
-
-.bg-primary {
-  background-color: $primary-color;
-}
+$default-border-radius: 5px;
 /* Header*/
-
+.menu.nav-menu .menu-item a{
+  color: white;
+}
 img.custom-logo {
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: auto;
+}
+.current_page_item, .current-menu-item {
+  background-color: #3b3b3d;
+  border-radius: $default-border-radius!important;
+}
+.menu-toggle {
+  // float: right;
+  margin-right: 5px;
 }

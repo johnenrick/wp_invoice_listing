@@ -25,20 +25,23 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'invoice' ); ?></a>
 
-	<header id="masthead" class="site-header d-flex">
-		<div class="site-branding">
+	<header id="masthead" class="site-header d-flex align-items-center bg-primary text-white py-1">
+		<div class="site-branding ml-4 mr-3">
 			<?php
 			the_custom_logo();
 			?>
 		</div><!-- .site-branding -->
 
 		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'invoice' ); ?></button>
+			<div class="d-flex justify-content-end ">
+				<button class="menu-toggle bg-white" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'invoice' ); ?></button>
+			</div>
 			<?php
 			wp_nav_menu(
 				array(
 					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
+					'menu_id' => 'primary-menu',
+					'add_li_class' => 'mx-1 p-1'
 				)
 			);
 			?>

@@ -1,0 +1,14 @@
+@import "../_theme.scss";
+
+.bg-primary {
+  background-color: $primary-color;
+}
+.bg-white {
+  background-color: white;
+}
+a.text-white {
+  color: white!important
+}
+.text-right {
+  text-align: right
+}

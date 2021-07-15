@@ -107,3 +107,15 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 /* Flex Box
 --------------------------------------------- */
 @import "utilities/flex";
+
+/* Spacing such as text colors
+--------------------------------------------- */
+@import "utilities/spacing";
+
+/* Button such as text colors
+--------------------------------------------- */
+@import "utilities/button";
+
+/* Others such as text colors
+--------------------------------------------- */
+@import "utilities/others";

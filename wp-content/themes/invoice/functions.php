@@ -160,6 +160,16 @@ require get_template_directory() . '/custom-post-types/custom-post-type.php';
  */
 add_action( 'init', 'custom_taxonomies');
 require get_template_directory() . '/custom-taxonomies/custom-taxonomies.php';
+/**
+ * Additional class for header menu items
+ */
+function add_additional_class_on_header_menu_item($classes, $item, $args) {
+	if(isset($args->add_li_class)) {
+			$classes[] = $args->add_li_class;
+	}
+	return $classes;
+}
+add_filter('nav_menu_css_class', 'add_additional_class_on_header_menu_item', 1, 3);
 
 /**
  * Implement the Custom Header feature.
