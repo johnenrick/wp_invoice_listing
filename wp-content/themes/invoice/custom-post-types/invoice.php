@@ -6,7 +6,7 @@ function getInvoiceCustomPostTypeProperty(){
     'labels' => [
       'name' => __( 'Invoices' ),
       'singular_name' => __('Invoice'),
-      'menu_name' => __('Invoice'),
+      'menu_name' => __('Invoices'),
       'parent_item_colon' => __('Parent Invoice'),
       'all_items' => __('All Invoices'),
       'view_item' => __('All Invoices'),

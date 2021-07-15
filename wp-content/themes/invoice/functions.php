@@ -155,6 +155,11 @@ add_action( 'wp_enqueue_scripts', 'invoice_scripts' );
  */
 add_action( 'init', 'custom_post_types');
 require get_template_directory() . '/custom-post-types/custom-post-type.php';
+/**
+ * Create Custom Taxonomies
+ */
+add_action( 'init', 'custom_taxonomies');
+require get_template_directory() . '/custom-taxonomies/custom-taxonomies.php';
 
 /**
  * Implement the Custom Header feature.
