@@ -1,6 +1,11 @@
+$primary-color: #191919;
 
+.bg-primary {
+  background-color: $primary-color;
+}
 /* Header*/
+
 img.custom-logo {
-  width: 200px;
-  height: 200px;
+  width: 50px;
+  height: 50px;
 }

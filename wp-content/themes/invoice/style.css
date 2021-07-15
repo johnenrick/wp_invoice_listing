@@ -48,10 +48,13 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 	- Alignments
 
 --------------------------------------------------------------*/
+.bg-primary {
+  background-color: #191919; }
+
 /* Header*/
 img.custom-logo {
-  width: 200px;
-  height: 200px; }
+  width: 50px;
+  height: 50px; }
 
 /*--------------------------------------------------------------
 # Generic
