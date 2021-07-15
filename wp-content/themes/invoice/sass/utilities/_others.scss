@@ -1,4 +1,5 @@
 @import "../_theme.scss";
+@import "./spacing";
 
 .bg-primary {
   background-color: $primary-color;
@@ -9,6 +10,24 @@
 a.text-white {
   color: white!important
 }
+.text-white {
+  color: white!important;
+}
+.text-secondary {
+  color: $secondary-color!important;
+}
 .text-right {
   text-align: right
+}
+.badge {
+  font-size: small;
+  padding: $spacing-1;
+}
+.badge-primary2 {
+  color: white!important;
+  background-color: $primary2-color;
+  border-radius: $default-border-radius;
+}
+.text-uppercase {
+  text-transform: uppercase;
 }

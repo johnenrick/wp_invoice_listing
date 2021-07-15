@@ -171,6 +171,14 @@ function add_additional_class_on_header_menu_item($classes, $item, $args) {
 }
 add_filter('nav_menu_css_class', 'add_additional_class_on_header_menu_item', 1, 3);
 
+function change_invoice_title($data, $postarr){
+	if($postarr['post_type'] == 'invoices'){
+		$data['post_title'] = 'Invoice #' . $postarr['ID'];
+	}
+	return $data;
+}
+add_filter('wp_insert_post_data', 'change_invoice_title', 99, 2);
+
 /**
  * Implement the Custom Header feature.
  */

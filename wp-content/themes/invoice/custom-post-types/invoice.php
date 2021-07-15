@@ -19,7 +19,6 @@ function getInvoiceCustomPostTypeProperty(){
       'not_found_in_trash' => __('Invoice Not Found In Trash'),
     ],
     'supports' => [
-      'title',
       'author', 
       'thumbnail', 
       'comments', 

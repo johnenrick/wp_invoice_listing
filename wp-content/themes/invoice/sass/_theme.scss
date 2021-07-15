@@ -1,7 +1,10 @@
 @import './utilities/spacing';
 $primary-color: #191919;
+$primary2-color: #6c7481;
+$secondary-color: #6c6f78;
+$warning-color: #ff9500;
 $default-border-radius: 5px;
-/* Header*/
+/* Layout: Header, Body, Footer*/
 .menu.nav-menu .menu-item a{
   color: white;
 }
@@ -16,4 +19,10 @@ img.custom-logo {
 .menu-toggle {
   // float: right;
   margin-right: 5px;
+}
+.site-main {
+  max-width: 1760px;
+}
+footer {
+  display: none;
 }

@@ -1,5 +1,15 @@
 @import "./spacing";
+@import "../theme";
 
 button {
   padding: $spacing-1;
+}
+.btn {
+  padding: $spacing-1;
+  border-radius: $default-border-radius;
+}
+.btn-warning {
+  border-width: 0px;
+  color: white;
+  background-color: $warning-color;
 }
