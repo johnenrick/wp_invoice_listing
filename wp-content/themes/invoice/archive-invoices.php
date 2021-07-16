@@ -22,10 +22,10 @@ get_header();
 			<div></div>
 			<button class="btn btn-warning">Mark As Paid</button>
 		</div>
-		<div>
-			<table id="invoiceTable" class="table">
+		<div class="table-responsive">
+			<table id="invoiceTable" class="table bg-white">
 				<thead class="bg-white">
-					<tr >
+					<tr class="border-bottom">
 						<th class="text-center"><input type="checkbox" /></th>
 						<th class="text-center">ID</th>
 						<th>Restaurant</th>
@@ -41,11 +41,27 @@ get_header();
 				</thead>
 				<tbody>
 				</tbody>
+				<tfoot class="">
+					<tr class="isLoading"><td colspan="11" class="text-center">Please wait...</td></tr>
+					<tr class="pagination ">
+						<td colspan="2" class="p-1">
+							<small>Page <span class="currentPage"></span> of <span class="totaResults"></span></small>
+						</td>
+						<td colspan="9" class="text-center p-1">
+							<div class="d-flex justify-content-end">
+								<button class="btn btn-sm btn-default pageButton" page="-2"><</button>
+								<div class="pageButtons"></div>
+								<button class="btn btn-sm btn-default pageButton" page="-3">></button>
+							</div>
+						</td>
+					</tr>
+				</tfoot>
 			</table>
-			<div id="prototypeContainer">
+		</div>
+		<div id="prototypeContainer">
 				<table>
 					<tbody>
-						<tr class="invoiceRow bg-white">
+						<tr class="invoiceRow c-pointer border-bottom hover-shadow">
 							<td class="text-center py-2 px-1"><input type="checkbox" /></td>
 							<td class="invoiceIdColumn text-center py-2 px-1">#23212</td>
 							<td class="restaurantNameColumn py-2 px-1"><img /> <span></span></td>
@@ -63,19 +79,29 @@ get_header();
 					</tbody>
 				</table>
 			</div>
-		</div>
 	</main><!-- #main -->
 	<script >
 		var $ = jQuery
 		var restaurants = {}
 		var loadedRestaurantIds = []
 		var invoiceStatusTaxonomy = {} // the key is id
-		function getInvoices(filter = null, offset = 0){
+		var itemPerPage = 3
+		var currentPage = 1
+		var totalPages = 1;
+		function getInvoices(offset = 0){
+			console.log('get invoices', offset)
+			$('#invoiceTable tbody').empty()
+			$('#invoiceTable .pagination').hide()
+			$('#invoiceTable .isLoading').show()
 			var includeTerms = offset === 0
 			$.ajax({
 				type: 'GET',
 				url: 'wp-json/myapi/v1/invoice/retrieve',
-				data: {include_terms: includeTerms},
+				data: { // request parameter
+					include_terms: includeTerms,
+					offset: offset,
+					limit: itemPerPage,
+				},
 			}).done(function(response) {
 				console.log('response', response)
 				if(includeTerms){	
@@ -84,13 +110,16 @@ get_header();
 					})
 				}
 				restaurants = {...restaurants, ...response['restaurants']}
-				restaurants.forEach(restaurant => {
-					loadedRestaurantIds.push(restaurant['ID'])
-				})
-				console.log('restaurants 1', restaurants)
+				for(let restaurantIds in restaurants){
+					loadedRestaurantIds.push(restaurantIds)
+				}
 				response['invoices'].forEach(invoice => {
 					addInvoices(invoice)
 				})
+				recreatePageButtons(response['total_invoices'])
+				$('#invoiceTable tbody').show()
+				$('#invoiceTable .pagination').show()
+				$('#invoiceTable .isLoading').hide()
 			})
 		}
 		function addInvoices(invoice){
@@ -132,7 +161,7 @@ get_header();
 					orders = invoice['postmetas']['orders']
 				}
 				var newRow = $('#prototypeContainer .invoiceRow').clone();
-				newRow.find('.invoiceIdColumn').text(invoiceId)
+				newRow.find('.invoiceIdColumn').text('#' + invoiceId)
 				newRow.find('.retaurantNameColumn img').attr('src', retaurantLogo)
 				newRow.find('.retaurantNameColumn span').text(retaurantName)
 				newRow.find('.startDateColumn').text(startDate)
@@ -160,10 +189,38 @@ get_header();
 			}else{
 				 return false
 			}
+		}
+		function recreatePageButtons(totalResults){
+			$('#invoiceTable tfoot .pageButtons').empty()
+			totalPages = Math.ceil(totalResults / itemPerPage)
+			$('#invoiceTable tfoot .pagination .totaResults').text(totalPages)
+			$('#invoiceTable tfoot .pagination .currentPage').text(currentPage)
+			for(let page = 1; page <= totalPages; page++){
+				$('#invoiceTable tfoot .pageButtons').append(`<button class="btn btn-sm btn-default rounded-none pageButton ${(currentPage === page ? 'text-black' : 'text-primary2')}" page="${page}">${page}</button>`)
+			}
 			
+		}
+		function listenPagination(){
+			$('.pagination').on('click', '.pageButton', function(e){
+				var page = $(this).attr('page') * 1
+				if(page === -2){ // previous
+					if(currentPage > 1){
+						--currentPage
+					}
+				}else if(page === -3){ // next
+					if(currentPage < totalPages){
+						++currentPage
+					}
+				}else{
+					currentPage = page
+				}
+				getInvoices((currentPage - 1) * itemPerPage)
+				e.preventDefault
+			})
 		}
 		$(document).ready(function(){
 			getInvoices()
+			listenPagination()
 		})
 	</script>
 <?php

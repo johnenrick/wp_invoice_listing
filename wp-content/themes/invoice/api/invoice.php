@@ -3,8 +3,11 @@
 function retrieve_invoice($parameter){
   global $wpdb;
   $wpdb->show_errors();
+  $totalResult = $wpdb->get_var("select count(*) from $wpdb->posts where post_type='invoices' AND post_status='publish'"); // count before pagination
   /* Get Invoices */
-  $invoices = $wpdb->get_results("select * from $wpdb->posts where post_type='invoices'", ARRAY_A); // invoices
+  $offset = $parameter['offset'];
+  $limit = $parameter['limit'];
+  $invoices = $wpdb->get_results("select * from $wpdb->posts where post_type='invoices' AND post_status='publish' LIMIT $limit OFFSET $offset", ARRAY_A); // invoices
   $invoiceIds = '';
   $invoiceIdIndexLookUp = [];
   foreach($invoices as $index => $invoice){
@@ -60,6 +63,7 @@ function retrieve_invoice($parameter){
 
   return wp_send_json([
     'invoices' => $invoices,
+    'total_invoices' => $totalResult * 1,
     'terms' => $terms,
     'restaurants' => $restaurants
   ]);

@@ -1559,12 +1559,33 @@ button {
 
 .btn {
   padding: 0.5em;
-  border-radius: 5px; }
+  border-radius: 5px;
+  border-width: 0px;
+  cursor: pointer; }
+
+.btn-sm {
+  font-size: smaller; }
+
+.btn-primary {
+  color: white !important; }
+
+.btn-primary2 {
+  color: white !important; }
+
+.btn-secondary {
+  color: white !important; }
+
+.btn-success {
+  color: white !important; }
 
 .btn-warning {
-  border-width: 0px;
-  color: white;
-  background-color: #ff9500; }
+  color: white !important; }
+
+.btn-default {
+  border-color: #e6e7eb;
+  color: #6c7481;
+  background-color: transparent;
+  border-width: 1px; }
 
 /* Others such as text colors
 --------------------------------------------- */
@@ -1947,6 +1968,9 @@ table.table {
 .bg-primary {
   background-color: #191919; }
 
+.btn-primary {
+  background-color: #191919; }
+
 .text-primary {
   color: #191919; }
 
@@ -1957,6 +1981,9 @@ a.text-primary {
   background-color: #191919; }
 
 .bg-primary2 {
+  background-color: #6c7481; }
+
+.btn-primary2 {
   background-color: #6c7481; }
 
 .text-primary2 {
@@ -1971,6 +1998,9 @@ a.text-primary2 {
 .bg-success {
   background-color: #4dbc91; }
 
+.btn-success {
+  background-color: #4dbc91; }
+
 .text-success {
   color: #4dbc91; }
 
@@ -1981,6 +2011,9 @@ a.text-success {
   background-color: #4dbc91; }
 
 .bg-secondary {
+  background-color: #e6e7eb; }
+
+.btn-secondary {
   background-color: #e6e7eb; }
 
 .text-secondary {
@@ -1995,6 +2028,9 @@ a.text-secondary {
 .bg-light {
   background-color: #7d7e83; }
 
+.btn-light {
+  background-color: #7d7e83; }
+
 .text-light {
   color: #7d7e83; }
 
@@ -2005,6 +2041,9 @@ a.text-light {
   background-color: #7d7e83; }
 
 .bg-warning {
+  background-color: #ff9500; }
+
+.btn-warning {
   background-color: #ff9500; }
 
 .text-warning {
@@ -2019,6 +2058,9 @@ a.text-warning {
 .bg-white {
   background-color: white; }
 
+.btn-white {
+  background-color: white; }
+
 .text-white {
   color: white; }
 
@@ -2027,6 +2069,21 @@ a.text-white {
 
 .badge-white {
   background-color: white; }
+
+.bg-black {
+  background-color: black; }
+
+.btn-black {
+  background-color: black; }
+
+.text-black {
+  color: black; }
+
+a.text-black {
+  color: black!important; }
+
+.badge-black {
+  background-color: black; }
 
 .badge {
   font-size: small;
@@ -2059,7 +2116,22 @@ a.text-white {
 .text-right {
   text-align: right; }
 
-.text-center {
-  text-align: center; }
+.font-weight-bold
+.table-responsive {
+  overflow-x: auto; }
+
+.c-pointer {
+  cursor: pointer; }
+
+/* Border */
+.rounded-none {
+  border-radius: 0px; }
+
+.border-bottom {
+  border-bottom: 1px solid #e6e7eb; }
+
+/* Shadow */
+.hover-shadow:hover {
+  box-shadow: 0px 1px 4px 0px #b3b3b3; }
 
 /*# sourceMappingURL=style.css.map */

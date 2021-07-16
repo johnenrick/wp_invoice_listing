@@ -7,9 +7,30 @@ button {
 .btn {
   padding: $spacing-1;
   border-radius: $default-border-radius;
+  border-width: 0px;
+  cursor: pointer;
+}
+.btn-sm {
+  font-size: smaller;
+}
+.btn-primary {
+  color: white!important;
+}
+.btn-primary2 {
+  color: white!important;
+}
+.btn-secondary {
+  color: white!important;
+}
+.btn-success {
+  color: white!important;
 }
 .btn-warning {
-  border-width: 0px;
-  color: white;
-  background-color: $warning-color;
+  color: white!important;
+}
+.btn-default {
+  border-color: $secondary-color;
+  color: $primary2-color;
+  background-color: transparent;
+  border-width: 1px;
 }
