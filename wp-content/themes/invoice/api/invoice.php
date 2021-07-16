@@ -3,11 +3,16 @@
 function retrieve_invoice($parameter){
   global $wpdb;
   $wpdb->show_errors();
-  $totalResult = $wpdb->get_var("select count(*) from $wpdb->posts where post_type='invoices' AND post_status='publish'"); // count before pagination
+  $invoiceSQLQuery = " from $wpdb->posts left join $wpdb->postmeta on $wpdb->postmeta.post_id=$wpdb->posts.id AND $wpdb->postmeta.meta_key='status' where post_type='invoices' AND post_status='publish'";
+  if(isset($parameter['invoice_status_filter']) && $parameter['invoice_status_filter']){
+    $invoiceStatusFilter = $parameter['invoice_status_filter'];
+    $invoiceSQLQuery .= "AND $wpdb->postmeta.meta_value=$invoiceStatusFilter";
+  }
+  $totalResult = $wpdb->get_var("select count(*) $invoiceSQLQuery"); // count before pagination
   /* Get Invoices */
   $offset = $parameter['offset'];
   $limit = $parameter['limit'];
-  $invoices = $wpdb->get_results("select * from $wpdb->posts where post_type='invoices' AND post_status='publish' LIMIT $limit OFFSET $offset", ARRAY_A); // invoices
+  $invoices = $wpdb->get_results("select $wpdb->posts.* $invoiceSQLQuery LIMIT $limit OFFSET $offset", ARRAY_A); // invoices
   $invoiceIds = '';
   $invoiceIdIndexLookUp = [];
   foreach($invoices as $index => $invoice){
@@ -18,7 +23,7 @@ function retrieve_invoice($parameter){
     }
     $invoiceIds .= $invoice['ID'];
   }
-  $postMetas = $wpdb->get_results("select * from $wpdb->postmeta where post_id in ($invoiceIds)", ARRAY_A); // post metas of invoices
+  $postMetas = $invoiceIds !== '' ? $wpdb->get_results("select * from $wpdb->postmeta where post_id in ($invoiceIds)", ARRAY_A) : []; // post metas of invoices
   $restaurantIds = '';
   foreach($postMetas as $postMeta){
     $invoiceIndex = $invoiceIdIndexLookUp[$postMeta['post_id']];
@@ -33,7 +38,7 @@ function retrieve_invoice($parameter){
   }
   /* Get restaurants */
   $restaurants = [];
-  $postMetas = $wpdb->get_results("select * from $wpdb->postmeta where post_id in ($restaurantIds)", ARRAY_A); // post metas of restaurants
+  $postMetas = $restaurantIds !== '' ? $wpdb->get_results("select * from $wpdb->postmeta where post_id in ($restaurantIds)", ARRAY_A) : []; // post metas of restaurants
   $logoIds = '';
   $logoIdRestaurantIdLookUp = [];
   foreach($postMetas as $postMeta){
@@ -51,7 +56,7 @@ function retrieve_invoice($parameter){
     }
   }
   /* Get restaurant photos */
-  $restaurantLogos = $wpdb->get_results("select * from $wpdb->posts where ID in ($logoIds)", ARRAY_A); // logos
+  $restaurantLogos = $logoIds !== '' ? $wpdb->get_results("select * from $wpdb->posts where ID in ($logoIds)", ARRAY_A) : []; // logos
   foreach($restaurantLogos as $restaurantLogo){
     $restaurantId = $logoIdRestaurantIdLookUp[$restaurantLogo['ID']];
     $restaurants[$restaurantId]['logo_url'] = $restaurantLogo['guid'];

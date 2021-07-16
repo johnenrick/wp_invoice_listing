@@ -10,14 +10,13 @@
 get_header();
 ?>
 	<main id="primary" class="site-main p-4">
-		
 		<h1 class="page-header">Invoices</h1>
 		<div class="d-flex align-items-center justify-content-space-between mb-2">
 			<div class="text-uppercase">
-				<span class="badge badge-primary2 mx-1">All</span>
-				<span class="text-primary2 mx-1">Ongoing</span>
-				<span class="text-primary2 mx-1">Verified</span>
-				<span class="text-primary2 mx-1">Pending</span>
+				<span class="statusFilter badge badge-primary2 mx-1 c-pointer" status="application-status-all" >All</span>
+				<span class="statusFilter badge text-primary2 mx-1 c-pointer" status="application-status-ongoing" >Ongoing</span>
+				<span class="statusFilter badge text-primary2 mx-1 c-pointer" status="application-status-verified" >Verified</span>
+				<span class="statusFilter badge text-primary2 mx-1 c-pointer" status="application-status-pending" >Pending</span>
 			</div>
 			<div></div>
 			<button class="btn btn-warning">Mark As Paid</button>
@@ -43,6 +42,7 @@ get_header();
 				</tbody>
 				<tfoot class="">
 					<tr class="isLoading"><td colspan="11" class="text-center">Please wait...</td></tr>
+					<tr class="noResult"><td colspan="11" class="text-center">No Result :(</td></tr>
 					<tr class="pagination ">
 						<td colspan="2" class="p-1">
 							<small>Page <span class="currentPage"></span> of <span class="totaResults"></span></small>
@@ -85,13 +85,23 @@ get_header();
 		var restaurants = {}
 		var loadedRestaurantIds = []
 		var invoiceStatusTaxonomy = {} // the key is id
+		var invoiceStatusSlugIdLookUp = {} // the key is slug, value is status id
 		var itemPerPage = 3
 		var currentPage = 1
-		var totalPages = 1;
-		function getInvoices(offset = 0){
+		var totalPages = 1
+		var isLoading = false
+		var currentStatusFilter = null
+		function getInvoices(){
+			if(isLoading){
+				return false
+			}
+			isLoading = true
+			offset = (currentPage - 1) * itemPerPage
 			console.log('get invoices', offset)
+			
 			$('#invoiceTable tbody').empty()
 			$('#invoiceTable .pagination').hide()
+			$('#invoiceTable .noResult').hide()
 			$('#invoiceTable .isLoading').show()
 			var includeTerms = offset === 0
 			$.ajax({
@@ -101,12 +111,14 @@ get_header();
 					include_terms: includeTerms,
 					offset: offset,
 					limit: itemPerPage,
+					invoice_status_filter: invoiceStatusSlugIdLookUp[currentStatusFilter]
 				},
 			}).done(function(response) {
 				console.log('response', response)
 				if(includeTerms){	
 					response['terms'].forEach(function(term){
 						invoiceStatusTaxonomy[term['term_id']] = term['slug']
+						invoiceStatusSlugIdLookUp[term['slug']] = term['term_id']
 					})
 				}
 				restaurants = {...restaurants, ...response['restaurants']}
@@ -116,11 +128,17 @@ get_header();
 				response['invoices'].forEach(invoice => {
 					addInvoices(invoice)
 				})
-				recreatePageButtons(response['total_invoices'])
+				if(response['total_invoices'] * 1){
+					recreatePageButtons(response['total_invoices'] * 1)
+					$('#invoiceTable .pagination').show()
+				}else{
+					$('#invoiceTable .noResult').show()
+				}
 				$('#invoiceTable tbody').show()
-				$('#invoiceTable .pagination').show()
 				$('#invoiceTable .isLoading').hide()
+				isLoading = false
 			})
+			return true
 		}
 		function addInvoices(invoice){
 			var invoiceId = invoice['ID'] 
@@ -173,15 +191,19 @@ get_header();
 				switch(status){
 					case 'application-status-pending':
 						newRow.find('.statusColumn .badge').addClass('badge-warning')
+						newRow.find('.statusColumn .badge').text('Pending')
 						break;
 					case 'application-status-ongoing':
 						newRow.find('.statusColumn .badge').addClass('badge-secondary')
+						newRow.find('.statusColumn .badge').text('Ongoing')
 						break;
 					case 'application-status-verified':
 						newRow.find('.statusColumn .badge').addClass('badge-success')
+						newRow.find('.statusColumn .badge').text('Verified')
 						break;
 					case 'application-status-paid':
 						newRow.find('.statusColumn .badge').addClass(['badge-white', 'font-weight-bold', 'text-success'])
+						newRow.find('.statusColumn .badge').text('Paid')
 						break;
 				}
 				$('#invoiceTable tbody').append(newRow)
@@ -214,13 +236,32 @@ get_header();
 				}else{
 					currentPage = page
 				}
-				getInvoices((currentPage - 1) * itemPerPage)
+				getInvoices()
 				e.preventDefault
+			})
+		}
+		function listenStatusFilter(){
+			$('.statusFilter').click(function(){
+				var status = $(this).attr('status')
+				if(currentStatusFilter === status){
+					return false
+				}
+				if(status === 'application-status-all'){
+					currentStatusFilter = null
+				}else{
+					currentStatusFilter = status
+				}
+				currentPage = 1
+				if(getInvoices()){
+					$('.statusFilter').removeClass('badge-primary2')
+					$(this).addClass('badge-primary2')
+				}
 			})
 		}
 		$(document).ready(function(){
 			getInvoices()
 			listenPagination()
+			listenStatusFilter()
 		})
 	</script>
 <?php
