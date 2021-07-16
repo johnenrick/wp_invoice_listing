@@ -65,7 +65,7 @@ get_header();
 				url: 'wp-json/myapi/v1/invoice/retrieve',
 				data: { },
 			}).done(function(response) {
-				// Do other stuff			
+				console.log('response', response)
 			})
 		}
 		$(document).ready(function(){
