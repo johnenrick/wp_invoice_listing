@@ -1,33 +1,38 @@
 @import "../_theme.scss";
 @import "./spacing";
 
-.bg-primary {
-  background-color: $primary-color;
+@each $name, $color in $colors {
+  .bg-#{$name} { background-color: #{$color}; }
+  .text-#{$name} { color: #{$color} ; }
+  a.text-#{$name} { color: #{$color}!important ; }
+  .badge-#{$name} { background-color: #{$color}; }
 }
-.bg-white {
-  background-color: white;
+
+.badge {
+  font-size: small;
+  padding: $spacing-1 / 2 $spacing-1;
+  border-radius: $default-border-radius;
 }
-a.text-white {
-  color: white!important
+.badge-pill {
+  border-radius: 5em!important;
+  padding-left: 10px;
+  padding-right: 10px;
 }
-.text-white {
+.badge-primary2 {
   color: white!important;
 }
-.text-secondary {
-  color: $secondary-color!important;
+.badge-success {
+  color: white!important;
+}
+.badge-warning {
+  color: white!important;
+}
+.text-uppercase {
+  text-transform: uppercase;
 }
 .text-right {
   text-align: right
 }
-.badge {
-  font-size: small;
-  padding: $spacing-1;
-}
-.badge-primary2 {
-  color: white!important;
-  background-color: $primary2-color;
-  border-radius: $default-border-radius;
-}
-.text-uppercase {
-  text-transform: uppercase;
+.text-center {
+  text-align: center
 }

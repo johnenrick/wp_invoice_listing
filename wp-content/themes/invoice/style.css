@@ -231,11 +231,27 @@ img.custom-logo {
 .menu-toggle {
   margin-right: 5px; }
 
+body {
+  background-color: #f7f8fa; }
+
 .site-main {
   max-width: 1760px; }
 
 footer {
   display: none; }
+
+table.table {
+  border-collapse: collapse;
+  /* remove column spacing and padding */
+  border: 1px solid #e6e7eb;
+  border-radius: 5px; }
+  table.table thead th {
+    color: #7d7e83;
+    text-align: center;
+    font-weight: normal;
+    text-transform: uppercase;
+    border: none;
+    padding: 0.5em; }
 
 /*--------------------------------------------------------------
 # Generic
@@ -1510,11 +1526,27 @@ img.custom-logo {
 .menu-toggle {
   margin-right: 5px; }
 
+body {
+  background-color: #f7f8fa; }
+
 .site-main {
   max-width: 1760px; }
 
 footer {
   display: none; }
+
+table.table {
+  border-collapse: collapse;
+  /* remove column spacing and padding */
+  border: 1px solid #e6e7eb;
+  border-radius: 5px; }
+  table.table thead th {
+    color: #7d7e83;
+    text-align: center;
+    font-weight: normal;
+    text-transform: uppercase;
+    border: none;
+    padding: 0.5em; }
 
 button {
   padding: 0.5em; }
@@ -1713,11 +1745,27 @@ img.custom-logo {
 .menu-toggle {
   margin-right: 5px; }
 
+body {
+  background-color: #f7f8fa; }
+
 .site-main {
   max-width: 1760px; }
 
 footer {
   display: none; }
+
+table.table {
+  border-collapse: collapse;
+  /* remove column spacing and padding */
+  border: 1px solid #e6e7eb;
+  border-radius: 5px; }
+  table.table thead th {
+    color: #7d7e83;
+    text-align: center;
+    font-weight: normal;
+    text-transform: uppercase;
+    border: none;
+    padding: 0.5em; }
 
 .p-1 {
   padding: 0.5em; }
@@ -1890,31 +1938,113 @@ footer {
 .bg-primary {
   background-color: #191919; }
 
+.text-primary {
+  color: #191919; }
+
+a.text-primary {
+  color: #191919!important; }
+
+.badge-primary {
+  background-color: #191919; }
+
+.bg-primary2 {
+  background-color: #6c7481; }
+
+.text-primary2 {
+  color: #6c7481; }
+
+a.text-primary2 {
+  color: #6c7481!important; }
+
+.badge-primary2 {
+  background-color: #6c7481; }
+
+.bg-success {
+  background-color: #4dbc91; }
+
+.text-success {
+  color: #4dbc91; }
+
+a.text-success {
+  color: #4dbc91!important; }
+
+.badge-success {
+  background-color: #4dbc91; }
+
+.bg-secondary {
+  background-color: #e6e7eb; }
+
+.text-secondary {
+  color: #e6e7eb; }
+
+a.text-secondary {
+  color: #e6e7eb!important; }
+
+.badge-secondary {
+  background-color: #e6e7eb; }
+
+.bg-light {
+  background-color: #7d7e83; }
+
+.text-light {
+  color: #7d7e83; }
+
+a.text-light {
+  color: #7d7e83!important; }
+
+.badge-light {
+  background-color: #7d7e83; }
+
+.bg-warning {
+  background-color: #ff9500; }
+
+.text-warning {
+  color: #ff9500; }
+
+a.text-warning {
+  color: #ff9500!important; }
+
+.badge-warning {
+  background-color: #ff9500; }
+
 .bg-white {
   background-color: white; }
 
-a.text-white {
-  color: white !important; }
-
 .text-white {
+  color: white; }
+
+a.text-white {
+  color: white!important; }
+
+.badge-white {
+  background-color: white; }
+
+.badge {
+  font-size: small;
+  padding: 0.25em 0.5em;
+  border-radius: 5px; }
+
+.badge-pill {
+  border-radius: 5em !important;
+  padding-left: 10px;
+  padding-right: 10px; }
+
+.badge-primary2 {
   color: white !important; }
 
-.text-secondary {
-  color: #6c6f78 !important; }
+.badge-success {
+  color: white !important; }
+
+.badge-warning {
+  color: white !important; }
+
+.text-uppercase {
+  text-transform: uppercase; }
 
 .text-right {
   text-align: right; }
 
-.badge {
-  font-size: small;
-  padding: 0.5em; }
-
-.badge-primary2 {
-  color: white !important;
-  background-color: #6c7481;
-  border-radius: 5px; }
-
-.text-uppercase {
-  text-transform: uppercase; }
+.text-center {
+  text-align: center; }
 
 /*# sourceMappingURL=style.css.map */

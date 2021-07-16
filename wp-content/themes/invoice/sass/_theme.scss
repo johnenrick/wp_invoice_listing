@@ -1,8 +1,21 @@
 @import './utilities/spacing';
 $primary-color: #191919;
 $primary2-color: #6c7481;
-$secondary-color: #6c6f78;
+$success-color: #4dbc91;
+$secondary-color: #e6e7eb;
+$light-color: #7d7e83;
 $warning-color: #ff9500;
+
+$colors: (
+  "primary": $primary-color,
+  "primary2": $primary2-color,
+  "success": $success-color,
+  "secondary": $secondary-color,
+  "light": $light-color,
+  "warning": $warning-color,
+  "white": white,
+);
+
 $default-border-radius: 5px;
 /* Layout: Header, Body, Footer*/
 .menu.nav-menu .menu-item a{
@@ -20,9 +33,28 @@ img.custom-logo {
   // float: right;
   margin-right: 5px;
 }
+body {
+  background-color: #f7f8fa;
+}
 .site-main {
   max-width: 1760px;
 }
 footer {
   display: none;
+}
+table.table {
+  border-collapse: collapse; /* remove column spacing and padding */
+  border: 1px solid $secondary-color;
+  border-radius: $default-border-radius;
+
+  thead th {
+    color: $light-color;
+    text-align: center;
+    font-weight: normal;
+    text-transform: uppercase;
+    border: none;
+    padding: $spacing-1;
+  }
+  thead tr:first-child {
+  }
 }
