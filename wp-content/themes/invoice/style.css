@@ -253,6 +253,9 @@ table.table {
     border: none;
     padding: 0.5em; }
 
+#prototypeContainer {
+  display: none; }
+
 /*--------------------------------------------------------------
 # Generic
 --------------------------------------------------------------*/
@@ -1548,6 +1551,9 @@ table.table {
     border: none;
     padding: 0.5em; }
 
+#prototypeContainer {
+  display: none; }
+
 button {
   padding: 0.5em; }
 
@@ -1766,6 +1772,9 @@ table.table {
     text-transform: uppercase;
     border: none;
     padding: 0.5em; }
+
+#prototypeContainer {
+  display: none; }
 
 .p-1 {
   padding: 0.5em; }
@@ -2029,7 +2038,13 @@ a.text-white {
   padding-left: 10px;
   padding-right: 10px; }
 
+.badge-primary {
+  color: white !important; }
+
 .badge-primary2 {
+  color: white !important; }
+
+.badge-secondary {
   color: white !important; }
 
 .badge-success {

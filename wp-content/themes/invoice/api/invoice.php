@@ -1,6 +1,6 @@
 <?php
 
-function retrieve_invoice(){
+function retrieve_invoice($parameter){
   global $wpdb;
   $wpdb->show_errors();
   /* Get Invoices */
@@ -18,9 +18,9 @@ function retrieve_invoice(){
   $postMetas = $wpdb->get_results("select * from $wpdb->postmeta where post_id in ($invoiceIds)", ARRAY_A); // post metas of invoices
   $restaurantIds = '';
   foreach($postMetas as $postMeta){
-    $postIndex = $invoiceIdIndexLookUp[$postMeta['post_id']];
-    $post = $invoices[$postIndex];
-    $post['postmetas'][$postMeta['meta_key']] = $postMeta['meta_value'];
+    $invoiceIndex = $invoiceIdIndexLookUp[$postMeta['post_id']];
+    $invoice = $invoices[$invoiceIndex];
+    $invoices[$invoiceIndex]['postmetas'][$postMeta['meta_key']] = $postMeta['meta_value'];
     if($postMeta['meta_key'] === 'restaurant'){
       if($restaurantIds !== ''){
         $restaurantIds .= ',';
@@ -29,16 +29,16 @@ function retrieve_invoice(){
     }
   }
   /* Get restaurants */
-  $retaurants = [];
+  $restaurants = [];
   $postMetas = $wpdb->get_results("select * from $wpdb->postmeta where post_id in ($restaurantIds)", ARRAY_A); // post metas of restaurants
   $logoIds = '';
   $logoIdRestaurantIdLookUp = [];
   foreach($postMetas as $postMeta){
     $restaurantId = $postMeta['post_id'];
-    if(!isset($retaurants[$restaurantId])){ // post id is the restaurant id
-      $retaurants[$restaurantId] = [];
+    if(!isset($restaurants[$restaurantId])){ // post id is the restaurant id
+      $restaurants[$restaurantId] = [];
     }
-    $retaurants[$restaurantId][$postMeta['meta_key']] = $postMeta['meta_value'];
+    $restaurants[$restaurantId][$postMeta['meta_key']] = $postMeta['meta_value'];
     if($postMeta['meta_key'] === 'logo'){
       $logoIdRestaurantIdLookUp[$postMeta['meta_value']] = $restaurantId;
       if($logoIds !== ''){
@@ -48,13 +48,19 @@ function retrieve_invoice(){
     }
   }
   /* Get restaurant photos */
-  $retaurantLogos = $wpdb->get_results("select * from $wpdb->posts where ID in ($logoIds)", ARRAY_A); // logos
-  foreach($retaurantLogos as $retaurantLogo){
-    $restaurantId = $logoIdRestaurantIdLookUp[$retaurantLogo['ID']];
-    $retaurants[$restaurantId]['logo_url'] = $retaurantLogo['guid'];
+  $restaurantLogos = $wpdb->get_results("select * from $wpdb->posts where ID in ($logoIds)", ARRAY_A); // logos
+  foreach($restaurantLogos as $restaurantLogo){
+    $restaurantId = $logoIdRestaurantIdLookUp[$restaurantLogo['ID']];
+    $restaurants[$restaurantId]['logo_url'] = $restaurantLogo['guid'];
   }
+  $terms = [];
+  if(isset($parameter['include_terms'])){ // application status
+    $terms = $wpdb->get_results("select $wpdb->term_taxonomy.taxonomy, $wpdb->term_taxonomy.term_id, $wpdb->terms.slug from $wpdb->term_taxonomy left join $wpdb->terms on $wpdb->terms.term_id=$wpdb->term_taxonomy.term_id where taxonomy='invoice-statuses'", ARRAY_A); // invoice status taxonomy
+  }
+
   return wp_send_json([
-    'posts' => $invoices,
-    'retaurants' => $retaurants
+    'invoices' => $invoices,
+    'terms' => $terms,
+    'restaurants' => $restaurants
   ]);
 }
