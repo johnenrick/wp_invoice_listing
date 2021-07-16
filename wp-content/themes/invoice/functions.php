@@ -144,6 +144,7 @@ function invoice_scripts() {
 	wp_style_add_data( 'invoice-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'invoice-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'jquery', get_template_directory_uri() . '/js/jquery-3.6.0.min.js', array( 'jquery' ), '3.6.0', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -170,7 +171,9 @@ function add_additional_class_on_header_menu_item($classes, $item, $args) {
 	return $classes;
 }
 add_filter('nav_menu_css_class', 'add_additional_class_on_header_menu_item', 1, 3);
-
+/**
+ * Set invoice title
+ */
 function change_invoice_title($data, $postarr){
 	if($postarr['post_type'] == 'invoices'){
 		$data['post_title'] = 'Invoice #' . $postarr['ID'];
@@ -178,7 +181,10 @@ function change_invoice_title($data, $postarr){
 	return $data;
 }
 add_filter('wp_insert_post_data', 'change_invoice_title', 99, 2);
-
+/**
+ * APIs
+ */
+require get_template_directory() . '/api/router.php';
 /**
  * Implement the Custom Header feature.
  */

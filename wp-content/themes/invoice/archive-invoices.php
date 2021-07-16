@@ -57,12 +57,20 @@ get_header();
 			</table>
 		</div>
 	</main><!-- #main -->
-	<script type="application/javascript">
-		setTimeout(function(){
-			console.log(jQuery)
-			console.log($)
-		}, 4000)
-		
+	<script >
+		var $ = jQuery
+		function getInvoices(filter = null, offset = 0){
+			$.ajax({
+				type: 'GET',
+				url: 'wp-json/myapi/v1/invoice/retrieve',
+				data: { },
+			}).done(function(response) {
+				// Do other stuff			
+			})
+		}
+		$(document).ready(function(){
+			getInvoices()
+		})
 	</script>
 <?php
 get_sidebar();
