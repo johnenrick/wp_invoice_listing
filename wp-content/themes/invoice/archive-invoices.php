@@ -20,9 +20,9 @@ get_header();
 				<span class="statusFilter badge text-primary2 mx-1 c-pointer" status="application-status-pending" >Pending</span>
 			</div>
 			<div class="d-flex">
-				<input name="dates" class="bg-white mr-1" size="22" style="width: auto" />
+				<input id="dateRangeFilter" name="dates" type="text" class="bg-white mr-1" size="22" style="width: auto" />
 				<div class="bg-white mr-1">
-					<input id="searchBox" class="border-none search-icon text-primary" type="text" placeholder="Search" >
+					<input id="searchBox" class="search-icon text-primary" type="text" placeholder="Search" >
 				</div>
 				<button class="btn btn-warning text-nowrap">Mark As Paid</button>
 			</div>
@@ -98,6 +98,8 @@ get_header();
 		var isLoading = false
 		var currentStatusFilter = null
 		var searchFilter = null
+		var startDateFilter = null
+		var endDateFilter = null
 		function getInvoices(){
 			if(isLoading){
 				return false
@@ -119,6 +121,8 @@ get_header();
 					offset: offset,
 					limit: itemPerPage,
 					search_filter: searchFilter,
+					start_date_filter: startDateFilter,
+					end_date_filter: endDateFilter,
 					invoice_status_filter: invoiceStatusSlugIdLookUp[currentStatusFilter]
 				},
 			}).done(function(response) {
@@ -270,22 +274,39 @@ get_header();
 			$('#searchBox').keyup(function(e){
 				if(e.key === 'Enter'){
 					searchFilter = $('#searchBox').val() === '' ? null : $('#searchBox').val()
+					currentPage = 1
 					getInvoices()
 				}
 			})
+		}
+		function listenDateFilter(){
+			$('#dateRangeFilter').daterangepicker({
+				locale: {
+					format: 'DD/MM/YYYY',
+					cancelLabel: 'Clear'
+				}
+			}, function(start, end, label) {
+				startDateFilter = start.format('YYYY-MM-DD')
+				endDateFilter = end.format('YYYY-MM-DD')
+				currentPage = 1
+				getInvoices()
+			});
+			$('#dateRangeFilter').val('');
+			$('#dateRangeFilter').on('cancel.daterangepicker', function(ev, picker) { // clear date
+				//do something, like clearing an input
+				$('#dateRangeFilter').val('');
+				startDateFilter = null
+				endDateFilter = null
+				currentPage = 1
+				getInvoices()
+			});
 		}
 		$(document).ready(function(){
 			getInvoices()
 			listenPagination()
 			listenStatusFilter()
 			listenSearchBox()
-			$('input[name="dates"]').daterangepicker({
-				locale: {
-					format: 'DD/MM/YYYY'
-				}
-			}, function(start, end, label) {
-				console.log("A new date selection was made: " + start.format('DD/MM/YYYY') + ' to ' + end.format('YYYY-MM-DD'));
-			});
+			listenDateFilter()
 
 		})
 	</script>

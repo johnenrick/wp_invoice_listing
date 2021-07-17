@@ -8,21 +8,31 @@ function retrieve_invoice($parameter){
     left join $wpdb->postmeta AS invoice_status on invoice_status.post_id=$wpdb->posts.id AND invoice_status.meta_key='status' 
     left join $wpdb->postmeta AS retaurant on retaurant.post_id=$wpdb->posts.id AND retaurant.meta_key='restaurant'
     left join $wpdb->postmeta AS retaurant_name on retaurant_name.post_id=retaurant.meta_value AND retaurant_name.meta_key='name'
+    left join $wpdb->postmeta AS start_date on start_date.post_id=$wpdb->posts.id AND start_date.meta_key='start_date'
     where post_type='invoices' AND post_status='publish'
   ";
   if(isset($parameter['invoice_status_filter']) && $parameter['invoice_status_filter']){
     $invoiceStatusFilter = $parameter['invoice_status_filter'];
-    $invoiceSQLQuery .= "AND $wpdb->postmeta.meta_value=$invoiceStatusFilter";
+    $invoiceSQLQuery .= " AND invoice_status.meta_value=$invoiceStatusFilter";
+  }
+  if(isset($parameter['start_date_filter']) && $parameter['start_date_filter']){
+    $startDateFilter = $parameter['start_date_filter'];
+    $invoiceSQLQuery .= " AND STR_TO_DATE(`start_date`.`meta_value`, '%Y%m%d') >= '$startDateFilter'";
+  }
+  if(isset($parameter['end_date_filter']) && $parameter['end_date_filter']){
+    $endDateFilter = $parameter['end_date_filter'];
+    $invoiceSQLQuery .= " AND STR_TO_DATE(`start_date`.`meta_value`, '%Y%m%d') <= '$endDateFilter'";
   }
   if(isset($parameter['search_filter']) && $parameter['search_filter']){
     $searchFilter = $parameter['search_filter'];
-    $invoiceSQLQuery .= "AND ($wpdb->posts.ID='$searchFilter' OR retaurant_name.meta_value like '%$searchFilter%')";
+    $invoiceSQLQuery .= " AND ($wpdb->posts.ID='$searchFilter' OR retaurant_name.meta_value like '%$searchFilter%')";
   }
+  
   $totalResult = $wpdb->get_var("select count(*) $invoiceSQLQuery"); // count before pagination
   /* Get Invoices */
   $offset = $parameter['offset'];
   $limit = $parameter['limit'];
-  $invoices = $wpdb->get_results("select $wpdb->posts.* $invoiceSQLQuery LIMIT $limit OFFSET $offset", ARRAY_A); // invoices
+  $invoices = $wpdb->get_results("select $wpdb->posts.*, STR_TO_DATE(start_date.meta_value, '%Y%m%d') $invoiceSQLQuery ORDER BY $wpdb->posts.ID ASC LIMIT $limit OFFSET $offset", ARRAY_A); // invoices
   $invoiceIds = '';
   $invoiceIdIndexLookUp = [];
   foreach($invoices as $index => $invoice){
