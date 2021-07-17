@@ -149,6 +149,11 @@ function invoice_scripts() {
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+	if( is_archive('invoices') ){
+		wp_enqueue_script('momentjs', get_template_directory_uri() . '/js/moment.min.js', array('jquery'), '', false);
+		wp_enqueue_script('daterangepicker', get_template_directory_uri() . '/js/daterangepicker.js', array('jquery'), '', false);
+		wp_enqueue_style( 'daterangepicker-style', get_template_directory_uri() . '/style/daterangepicker.css', array(), _S_VERSION );
+	} 
 }
 add_action( 'wp_enqueue_scripts', 'invoice_scripts' );
 /**

@@ -43,7 +43,12 @@
 .text-center {
   text-align: center
 }
-.font-weight-bold
+.text-nowrap {
+  white-space: nowrap
+}
+.font-weight-bold {
+  font-weight: bold
+}
 .table-responsive {
   overflow-x: auto;
 }
@@ -54,10 +59,33 @@
 .rounded-none {
   border-radius: 0px
 }
+.rounded {
+  border-radius: $default-border-radius;
+}
 .border-bottom {
   border-bottom: 1px solid $secondary-color;
+}
+.border-none {
+  border: none!important;
 }
 /* Shadow */
 .hover-shadow:hover {
   box-shadow: 0px 1px 4px 0px #b3b3b3;
+}
+/* Input */
+input {
+  background-color: transparent;
+  padding-left: $spacing-1!important;
+}
+input.search-icon:before {
+  position: absolute;
+  top: 6px;
+  left: 5px;
+  z-index: 20;
+  font: normal 20px/1 dashicons!important;
+  content: "\f179";
+  speak: never;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #72aee6;
 }

@@ -11,6 +11,7 @@ get_header();
 ?>
 	<main id="primary" class="site-main p-4">
 		<h1 class="page-header">Invoices</h1>
+		<?=$post->post_type?>
 		<div class="d-flex align-items-center justify-content-space-between mb-2">
 			<div class="text-uppercase">
 				<span class="statusFilter badge badge-primary2 mx-1 c-pointer" status="application-status-all" >All</span>
@@ -18,8 +19,13 @@ get_header();
 				<span class="statusFilter badge text-primary2 mx-1 c-pointer" status="application-status-verified" >Verified</span>
 				<span class="statusFilter badge text-primary2 mx-1 c-pointer" status="application-status-pending" >Pending</span>
 			</div>
-			<div></div>
-			<button class="btn btn-warning">Mark As Paid</button>
+			<div class="d-flex">
+				<input name="dates" class="bg-white mr-1" size="22" style="width: auto" />
+				<div class="bg-white mr-1">
+					<input id="searchBox" class="border-none search-icon text-primary" type="text" placeholder="Search" >
+				</div>
+				<button class="btn btn-warning text-nowrap">Mark As Paid</button>
+			</div>
 		</div>
 		<div class="table-responsive">
 			<table id="invoiceTable" class="table bg-white">
@@ -64,7 +70,7 @@ get_header();
 						<tr class="invoiceRow c-pointer border-bottom hover-shadow">
 							<td class="text-center py-2 px-1"><input type="checkbox" /></td>
 							<td class="invoiceIdColumn text-center py-2 px-1">#23212</td>
-							<td class="restaurantNameColumn py-2 px-1"><img /> <span></span></td>
+							<td class="restaurantNameColumn py-2 px-1 d-flex align-items-center"><img class="mr-1 rounded" style="width:25px; height: auto" /> <span></span></td>
 							<td class="statusColumn text-center py-2 px-1">
 								<span class="badge badge-pill text-uppercase">Ongoing</span>
 							</td>
@@ -91,6 +97,7 @@ get_header();
 		var totalPages = 1
 		var isLoading = false
 		var currentStatusFilter = null
+		var searchFilter = null
 		function getInvoices(){
 			if(isLoading){
 				return false
@@ -111,6 +118,7 @@ get_header();
 					include_terms: includeTerms,
 					offset: offset,
 					limit: itemPerPage,
+					search_filter: searchFilter,
 					invoice_status_filter: invoiceStatusSlugIdLookUp[currentStatusFilter]
 				},
 			}).done(function(response) {
@@ -142,8 +150,8 @@ get_header();
 		}
 		function addInvoices(invoice){
 			var invoiceId = invoice['ID'] 
-			var retaurantName = 'Unknown'
-			var retaurantLogo = 'Unknown'
+			var restaurantName = 'Unknown'
+			var restaurantLogo = 'Unknown'
 			var status = 'application-status-pending'
 			var startDate = '-'
 			var endDate = '-'
@@ -155,7 +163,7 @@ get_header();
 				if(typeof invoice['postmetas']['restaurant'] !== 'undefined'){
 					restaurantId = invoice['postmetas']['restaurant']
 					restaurantName = restaurants[restaurantId]['name']
-					restaurantLogo = restaurants[restaurantId]['logo']
+					restaurantLogo = restaurants[restaurantId]['logo_url']
 				}
 				if(typeof invoice['postmetas']['status'] !== 'undefined'){
 					status = invoiceStatusTaxonomy[invoice['postmetas']['status']]
@@ -180,8 +188,8 @@ get_header();
 				}
 				var newRow = $('#prototypeContainer .invoiceRow').clone();
 				newRow.find('.invoiceIdColumn').text('#' + invoiceId)
-				newRow.find('.retaurantNameColumn img').attr('src', retaurantLogo)
-				newRow.find('.retaurantNameColumn span').text(retaurantName)
+				newRow.find('.restaurantNameColumn img').attr('src', restaurantLogo)
+				newRow.find('.restaurantNameColumn span').text(restaurantName)
 				newRow.find('.startDateColumn').text(startDate)
 				newRow.find('.endDateColumn').text(endDate)
 				newRow.find('.totalColumn').text(total)
@@ -258,10 +266,27 @@ get_header();
 				}
 			})
 		}
+		function listenSearchBox(){
+			$('#searchBox').keyup(function(e){
+				if(e.key === 'Enter'){
+					searchFilter = $('#searchBox').val() === '' ? null : $('#searchBox').val()
+					getInvoices()
+				}
+			})
+		}
 		$(document).ready(function(){
 			getInvoices()
 			listenPagination()
 			listenStatusFilter()
+			listenSearchBox()
+			$('input[name="dates"]').daterangepicker({
+				locale: {
+					format: 'DD/MM/YYYY'
+				}
+			}, function(start, end, label) {
+				console.log("A new date selection was made: " + start.format('DD/MM/YYYY') + ' to ' + end.format('YYYY-MM-DD'));
+			});
+
 		})
 	</script>
 <?php
