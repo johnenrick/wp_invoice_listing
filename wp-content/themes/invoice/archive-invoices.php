@@ -146,7 +146,6 @@ get_header();
 			}
 			isLoading = true
 			offset = (currentPage - 1) * itemPerPage
-			console.log('get invoices', offset)
 			
 			$('#invoiceTable tbody').empty()
 			$('#invoiceTable .pagination').hide()
@@ -166,7 +165,6 @@ get_header();
 					invoice_status_filter: invoiceStatusSlugIdLookUp[currentStatusFilter]
 				},
 			}).done(function(response) {
-				console.log('response', response)
 				if(includeTerms){	
 					response['terms'].forEach(function(term){
 						invoiceStatusTaxonomy[term['term_id']] = term['slug']
@@ -216,14 +214,12 @@ get_header();
 					var day = (invoice['postmetas']['start_date']).slice(6)
 					var month = (invoice['postmetas']['start_date']).slice(4,6)
 					var year = (invoice['postmetas']['start_date']).slice(0,4)
-					console.log(invoice['postmetas']['start_date'], `${day}-${month}-${year}`)
 					startDate = `${day}-${month}-${year}`
 				}
 				if(typeof invoice['postmetas']['end_date'] !== 'undefined' && invoice['postmetas']['end_date'] !== ''){
 					var day = (invoice['postmetas']['end_date']).slice(6)
 					var month = (invoice['postmetas']['end_date']).slice(4,6)
 					var year = (invoice['postmetas']['end_date']).slice(0,4)
-					console.log(invoice['postmetas']['end_date'], `${day}-${month}-${year}`)
 					endDate = `${day}-${month}-${year}`
 				}
 				if(typeof invoice['postmetas']['total'] !== 'undefined'){
@@ -353,8 +349,7 @@ get_header();
 		}
 		function listenInvoiceMark(){
 			$('#markAllInvoice').click(function(){
-				console.log($(this).prop('checked'), $('.markInvoice'))
-				$('.markInvoice').attr('checked', $(this).prop('checked'));
+				$('#invoiceTable .markInvoice').prop('checked', $(this).prop('checked'));
 			})
 			$('#markAsPaid').click(function(){
 				var invoiceIds = []
@@ -367,8 +362,10 @@ get_header();
 			})
 		}
 		function listenOpenInvoice(){
-			$('#invoiceTable').on('click', '.invoiceRow', function(){
-				console.log($(this).attr('invoice_id'))
+			$('#invoiceTable').on('click', '.invoiceRow', function(event){
+				if($(event.target).is("input")){
+					return true
+				}
 				$('#invoiceDetails').find('.invoiceId').text($(this).find('.invoiceIdColumn').text())
 				$('#invoiceDetails').find('.restaurantLogo').attr('src', $(this).find('.restaurantNameColumn img').attr('src'))
 				$('#invoiceDetails').find('.restaurantName').text($(this).find('.restaurantNameColumn').text())
