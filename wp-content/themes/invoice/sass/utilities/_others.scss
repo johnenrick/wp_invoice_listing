@@ -4,6 +4,9 @@
 @each $name, $color in $colors {
   .bg-#{$name} { background-color: #{$color}; }
   .btn-#{$name} { background-color: #{$color}; }
+  .btn-#{$name}[disabled]{
+    background-color: lighten($color, 20%)
+  }
   .text-#{$name} { color: #{$color} ; }
   a.text-#{$name} { color: #{$color}!important ; }
   .badge-#{$name} { background-color: #{$color}; }

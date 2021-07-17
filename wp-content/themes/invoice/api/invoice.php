@@ -93,3 +93,17 @@ function retrieve_invoice($parameter){
     'restaurants' => $restaurants
   ]);
 }
+
+function mark_as_paid_invoice($parameter){
+  global $wpdb;
+  $result = false;
+  if(isset($parameter['invoice_ids']) && count($parameter['invoice_ids'])){
+    $invoiceIds = $parameter['invoice_ids'];
+    $statusPaidTermId = $wpdb->get_var("select $wpdb->terms.term_id from $wpdb->terms where slug='application-status-paid' LIMIT 1"); // invoice status taxonomy
+    $invoiceList = implode(",",$invoiceIds);
+    $result = $wpdb->query("UPDATE $wpdb->postmeta SET meta_value=$statusPaidTermId where meta_key='status' AND post_id in ($invoiceList)");
+  }
+  return wp_send_json([
+    'result' => $result
+  ]);
+}

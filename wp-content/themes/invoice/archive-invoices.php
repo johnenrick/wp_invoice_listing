@@ -11,7 +11,6 @@ get_header();
 ?>
 	<main id="primary" class="site-main p-4">
 		<h1 class="page-header">Invoices</h1>
-		<?=$post->post_type?>
 		<div class="d-flex align-items-center justify-content-space-between mb-2">
 			<div class="text-uppercase">
 				<span class="statusFilter badge badge-primary2 mx-1 c-pointer" status="application-status-all" >All</span>
@@ -24,14 +23,14 @@ get_header();
 				<div class="bg-white mr-1">
 					<input id="searchBox" class="search-icon text-primary" type="text" placeholder="Search" >
 				</div>
-				<button class="btn btn-warning text-nowrap">Mark As Paid</button>
+				<button id="markAsPaid" class="btn btn-warning text-nowrap" >Mark As Paid</button>
 			</div>
 		</div>
 		<div class="table-responsive">
 			<table id="invoiceTable" class="table bg-white">
 				<thead class="bg-white">
 					<tr class="border-bottom">
-						<th class="text-center"><input type="checkbox" /></th>
+						<th class="text-center"><input id="markAllInvoice" type="checkbox" value="all" /></th>
 						<th class="text-center">ID</th>
 						<th>Restaurant</th>
 						<th>Status</th>
@@ -65,26 +64,29 @@ get_header();
 			</table>
 		</div>
 		<div id="prototypeContainer">
-				<table>
-					<tbody>
-						<tr class="invoiceRow c-pointer border-bottom hover-shadow">
-							<td class="text-center py-2 px-1"><input type="checkbox" /></td>
-							<td class="invoiceIdColumn text-center py-2 px-1">#23212</td>
-							<td class="restaurantNameColumn py-2 px-1 d-flex align-items-center"><img class="mr-1 rounded" style="width:25px; height: auto" /> <span></span></td>
-							<td class="statusColumn text-center py-2 px-1">
-								<span class="badge badge-pill text-uppercase">Ongoing</span>
-							</td>
-							<td class="startDateColumn text-center py-2 px-1">16/08/2018</td>
-							<td class="endDateColumn text-center py-2 px-1">16/08/2018</td>
-							<td class="totalColumn text-right py-2 px-1">HK$2.99</td>
-							<td class="feesColumn text-right py-2 px-1">HK$2.99</td>
-							<td class="transferColumn  text-right py-2 px-1">HK$2.99</td>
-							<td class="orderColumn text-right py-2 px-1">20</td>
-							<td>Download</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+			<table>
+				<tbody>
+					<tr class="invoiceRow c-pointer border-bottom hover-shadow">
+						<td class="text-center py-2 px-1"><input class="markInvoice" type="checkbox" /></td>
+						<td class="invoiceIdColumn text-center py-2 px-1">#23212</td>
+						<td class="restaurantNameColumn py-2 px-1 d-flex align-items-center"><img class="mr-1 rounded" style="width:25px; height: auto" /> <span></span></td>
+						<td class="statusColumn text-center py-2 px-1">
+							<span class="badge badge-pill text-uppercase">Ongoing</span>
+						</td>
+						<td class="startDateColumn text-center py-2 px-1">16/08/2018</td>
+						<td class="endDateColumn text-center py-2 px-1">16/08/2018</td>
+						<td class="totalColumn text-right py-2 px-1">HK$2.99</td>
+						<td class="feesColumn text-right py-2 px-1">HK$2.99</td>
+						<td class="transferColumn  text-right py-2 px-1">HK$2.99</td>
+						<td class="orderColumn text-right py-2 px-1">20</td>
+						<td>Download</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="modal">
+			<div class="moday-body">Modal Body</div>
+		</div>
 	</main><!-- #main -->
 	<script >
 		var $ = jQuery
@@ -191,7 +193,9 @@ get_header();
 					orders = invoice['postmetas']['orders']
 				}
 				var newRow = $('#prototypeContainer .invoiceRow').clone();
+				newRow.attr('invoice_id', invoiceId)
 				newRow.find('.invoiceIdColumn').text('#' + invoiceId)
+				newRow.find('.markInvoice').attr('value', invoiceId)
 				newRow.find('.restaurantNameColumn img').attr('src', restaurantLogo)
 				newRow.find('.restaurantNameColumn span').text(restaurantName)
 				newRow.find('.startDateColumn').text(startDate)
@@ -237,11 +241,11 @@ get_header();
 		function listenPagination(){
 			$('.pagination').on('click', '.pageButton', function(e){
 				var page = $(this).attr('page') * 1
-				if(page === -2){ // previous
+				if(page === -2){ // previous page
 					if(currentPage > 1){
 						--currentPage
 					}
-				}else if(page === -3){ // next
+				}else if(page === -3){ // next page
 					if(currentPage < totalPages){
 						++currentPage
 					}
@@ -301,13 +305,47 @@ get_header();
 				getInvoices()
 			});
 		}
+		function listenInvoiceMark(){
+			$('#markAllInvoice').click(function(){
+				console.log($(this).prop('checked'), $('.markInvoice'))
+				$('.markInvoice').attr('checked', $(this).prop('checked'));
+			})
+			$('#markAsPaid').click(function(){
+				console.log($('.markInvoice:checked').length)
+				var invoiceIds = []
+				$('.markInvoice:checked').each(function(){
+					invoiceIds.push($(this).val())
+				})
+				if(invoiceIds.length){
+					markAsPaid(invoiceIds)
+				}
+			})
+		}
+		function markAsPaid(invoiceIds){
+			isLoading = true
+			$('#markAsPaid').attr('disabled', true)
+			$.post('wp-json/myapi/v1/invoice/mark-as-paid', { // request parameter
+					invoice_ids: invoiceIds
+				}, function(response) {
+					isLoading = false
+					if(response['result']){
+						invoiceIds.forEach(function(invoiceId){
+							$('.invoiceRow[invoice_id="' + invoiceId + '"] .statusColumn .badge').removeClass(['badge-warning', 'badge-secondary', 'badge-success'])
+							$('.invoiceRow[invoice_id="' + invoiceId + '"] .statusColumn .badge').addClass(['badge-white', 'font-weight-bold', 'text-success'])
+							$('.invoiceRow[invoice_id="' + invoiceId + '"] .statusColumn .badge').text('Paid')
+						})
+					}
+					$('.markInvoice').attr('checked', false);
+					$('#markAsPaid').attr('disabled', false)
+			})
+		}
 		$(document).ready(function(){
 			getInvoices()
 			listenPagination()
 			listenStatusFilter()
 			listenSearchBox()
 			listenDateFilter()
-
+			listenInvoiceMark()
 		})
 	</script>
 <?php
