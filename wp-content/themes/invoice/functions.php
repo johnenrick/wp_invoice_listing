@@ -145,6 +145,7 @@ function invoice_scripts() {
 
 	wp_enqueue_script( 'invoice-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'jquery', get_template_directory_uri() . '/js/jquery-3.6.0.min.js', array( 'jquery' ), '3.6.0', true );
+	wp_enqueue_style( 'wpb-fa', get_stylesheet_directory_uri() . '/style/all.css' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

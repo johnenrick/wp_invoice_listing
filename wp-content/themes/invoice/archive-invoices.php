@@ -11,6 +11,7 @@ get_header();
 ?>
 	<main id="primary" class="site-main p-4">
 		<h1 class="page-header">Invoices</h1>
+		
 		<div class="d-flex align-items-center justify-content-space-between mb-2">
 			<div class="text-uppercase">
 				<span class="statusFilter badge badge-primary2 mx-1 c-pointer" status="application-status-all" >All</span>
@@ -19,9 +20,13 @@ get_header();
 				<span class="statusFilter badge text-primary2 mx-1 c-pointer" status="application-status-pending" >Pending</span>
 			</div>
 			<div class="d-flex">
-				<input id="dateRangeFilter" name="dates" type="text" class="bg-white mr-1" size="22" style="width: auto" />
-				<div class="bg-white mr-1">
-					<input id="searchBox" class="search-icon text-primary" type="text" placeholder="Search" >
+				<div class="bg-white border pl-1 mr-1">
+					<i class="fas fa-calendar"></i>
+					<input id="dateRangeFilter" name="dates" type="text" class="  border-none" size="22" style="width: auto" />
+				</div>
+				<div class="border bg-white mr-1 pl-1">
+					<i class="fas fa-search"></i>
+					<input id="searchBox" class="search-icon text-primary border-none" type="text" placeholder="Search" >
 				</div>
 				<button id="markAsPaid" class="btn btn-warning text-nowrap" >Mark As Paid</button>
 			</div>
@@ -79,7 +84,7 @@ get_header();
 						<td class="feesColumn text-right py-2 px-1">HK$2.99</td>
 						<td class="transferColumn  text-right py-2 px-1">HK$2.99</td>
 						<td class="ordersColumn text-right py-2 px-1">20</td>
-						<td>Download</td>
+						<td class="px-1 text-warning"><i class="fas fa-cloud-download-alt"></i></td>
 					</tr>
 				</tbody>
 			</table>
