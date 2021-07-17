@@ -78,14 +78,47 @@ get_header();
 						<td class="totalColumn text-right py-2 px-1">HK$2.99</td>
 						<td class="feesColumn text-right py-2 px-1">HK$2.99</td>
 						<td class="transferColumn  text-right py-2 px-1">HK$2.99</td>
-						<td class="orderColumn text-right py-2 px-1">20</td>
+						<td class="ordersColumn text-right py-2 px-1">20</td>
 						<td>Download</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		<div class="modal">
-			<div class="modal-body">Modal Body</div>
+		<div id="invoiceDetails" class="modal" style="display:none">
+			<div class="modal-body p-2" style="width: 340px">
+				<h3 class="my-1">Invoice Details <span class="status badge badge-warning">Verified</span></h3>
+				<div class=" mb-1">
+					Invoice ID: <strong class="invoiceId">#12736</strong> 
+				</div>
+				<div class="mb-1">
+					Date: <strong class="startDate">12/07/2019</strong> - <strong class="endDate">12/08/2019</strong>
+				</div>
+				
+				<div class=" d-flex align-items-center mb-1 ">
+					<span class="mr-1">Restaurant:</span> 
+					<img class="restaurantLogo mr-1" style="width: 25px; height: 25px"> 
+					<strong class="restaurantName">Jade Phoe</strong>
+				</div>
+				<div class=" d-flex align-items-center justify-content-space-between mb-1">
+					<span class="mr-1">Total:</span>
+					<strong class="total float-right">HK$100.00</strong>
+				</div>
+				<div class=" d-flex align-items-center justify-content-space-between mb-1">
+					<span class="mr-1">Fees:</span> 
+					<strong class="fees float-right">HK$50.00</strong>
+				</div>
+				<div class=" d-flex align-items-center justify-content-space-between mb-1">
+					<span class="mr-1">Transfer:</span> 
+					<strong class="transfer float-right">HK$50.00</strong>
+				</div>
+				<div class=" d-flex align-items-center justify-content-space-between mb-1">
+					<span class="mr-1">Orders:</span> 
+					<strong class="orders float-right">HK$10.00</strong>
+				</div>
+				<div class="text-right mt-2">
+					<button id="closeInvoiceDetails" class="btn bg-default">Close</button>
+				</div>
+			</div>
 		</div>
 	</main><!-- #main -->
 	<script >
@@ -174,11 +207,19 @@ get_header();
 				if(typeof invoice['postmetas']['status'] !== 'undefined'){
 					status = invoiceStatusTaxonomy[invoice['postmetas']['status']]
 				}
-				if(typeof invoice['postmetas']['start_date'] !== 'undefined'){
-					startDate = invoice['postmetas']['start_date']
+				if(typeof invoice['postmetas']['start_date'] !== 'undefined' && invoice['postmetas']['end_date'] !== ''){
+					var day = (invoice['postmetas']['start_date']).slice(6)
+					var month = (invoice['postmetas']['start_date']).slice(4,6)
+					var year = (invoice['postmetas']['start_date']).slice(0,4)
+					console.log(invoice['postmetas']['start_date'], `${day}-${month}-${year}`)
+					startDate = `${day}-${month}-${year}`
 				}
-				if(typeof invoice['postmetas']['end_date'] !== 'undefined'){
-					endDate = invoice['postmetas']['end_date']
+				if(typeof invoice['postmetas']['end_date'] !== 'undefined' && invoice['postmetas']['end_date'] !== ''){
+					var day = (invoice['postmetas']['end_date']).slice(6)
+					var month = (invoice['postmetas']['end_date']).slice(4,6)
+					var year = (invoice['postmetas']['end_date']).slice(0,4)
+					console.log(invoice['postmetas']['end_date'], `${day}-${month}-${year}`)
+					endDate = `${day}-${month}-${year}`
 				}
 				if(typeof invoice['postmetas']['total'] !== 'undefined'){
 					total = invoice['postmetas']['total']
@@ -203,7 +244,7 @@ get_header();
 				newRow.find('.totalColumn').text(total)
 				newRow.find('.feesColumn').text(fees)
 				newRow.find('.transferColumn').text(transfer)
-				newRow.find('.ordersdColumn').text(orders)
+				newRow.find('.ordersColumn').text(orders)
 				switch(status){
 					case 'application-status-pending':
 						newRow.find('.statusColumn .badge').addClass('badge-warning')
@@ -321,6 +362,26 @@ get_header();
 				}
 			})
 		}
+		function listenOpenInvoice(){
+			$('#invoiceTable').on('click', '.invoiceRow', function(){
+				console.log($(this).attr('invoice_id'))
+				$('#invoiceDetails').find('.invoiceId').text($(this).find('.invoiceIdColumn').text())
+				$('#invoiceDetails').find('.restaurantLogo').attr('src', $(this).find('.restaurantNameColumn img').attr('src'))
+				$('#invoiceDetails').find('.restaurantName').text($(this).find('.restaurantNameColumn').text())
+				$('#invoiceDetails').find('.startDate').text($(this).find('.startDateColumn').text())
+				$('#invoiceDetails').find('.endDate').text($(this).find('.endDateColumn').text())
+				$('#invoiceDetails').find('.total').text($(this).find('.totalColumn').text())
+				$('#invoiceDetails').find('.fees').text($(this).find('.feesColumn').text())
+				$('#invoiceDetails').find('.transfer').text($(this).find('.transferColumn').text())
+				$('#invoiceDetails').find('.orders').text($(this).find('.ordersColumn').text())
+				$('#invoiceDetails').find('.status').text($(this).find('.statusColumn .badge').text())
+				$('#invoiceDetails').find('.status').attr('class', $(this).find('.statusColumn .badge').attr('class')).addClass('status')
+				$('#invoiceDetails').show();
+			})
+			$('#closeInvoiceDetails').click(function(){
+				$('#invoiceDetails').hide();
+			})
+		}
 		function markAsPaid(invoiceIds){
 			isLoading = true
 			$('#markAsPaid').attr('disabled', true)
@@ -346,6 +407,7 @@ get_header();
 			listenSearchBox()
 			listenDateFilter()
 			listenInvoiceMark()
+			listenOpenInvoice()
 		})
 	</script>
 <?php

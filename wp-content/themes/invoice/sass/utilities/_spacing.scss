@@ -3,7 +3,7 @@ $spacing-2: 0.5em * 2;
 $spacing-3: 0.5em * 3;
 $spacing-4: 0.5em * 4;
 
-@for $i from 1 through 4 {
+@for $i from 0 through 4 {
   .p-#{$i} {
     padding: ($spacing-1 * $i);
   }

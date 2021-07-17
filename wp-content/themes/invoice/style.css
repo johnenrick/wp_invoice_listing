@@ -48,6 +48,48 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 	- Alignments
 
 --------------------------------------------------------------*/
+.p-0 {
+  padding: 0em; }
+
+.py-0 {
+  padding-top: 0em;
+  padding-bottom: 0em; }
+
+.px-0 {
+  padding-right: 0em;
+  padding-left: 0em; }
+
+.pt-0 {
+  padding-top: 0em; }
+
+.pr-0 {
+  padding-right: 0em; }
+
+.pb-0 {
+  padding-bottom: 0em; }
+
+.pl-0 {
+  padding-left: 0em; }
+
+.m-0 {
+  margin: 0em; }
+
+.mt-0 {
+  margin-top: 0em; }
+
+.mx-0 {
+  margin-right: 0em;
+  margin-left: 0em; }
+
+.mr-0 {
+  margin-right: 0em; }
+
+.ml-0 {
+  margin-left: 0em; }
+
+.mb-0 {
+  margin-bottom: 0em; }
+
 .p-1 {
   padding: 0.5em; }
 
@@ -1008,6 +1050,48 @@ textarea {
 
 /* Spacing such as text colors
 --------------------------------------------- */
+.p-0 {
+  padding: 0em; }
+
+.py-0 {
+  padding-top: 0em;
+  padding-bottom: 0em; }
+
+.px-0 {
+  padding-right: 0em;
+  padding-left: 0em; }
+
+.pt-0 {
+  padding-top: 0em; }
+
+.pr-0 {
+  padding-right: 0em; }
+
+.pb-0 {
+  padding-bottom: 0em; }
+
+.pl-0 {
+  padding-left: 0em; }
+
+.m-0 {
+  margin: 0em; }
+
+.mt-0 {
+  margin-top: 0em; }
+
+.mx-0 {
+  margin-right: 0em;
+  margin-left: 0em; }
+
+.mr-0 {
+  margin-right: 0em; }
+
+.ml-0 {
+  margin-left: 0em; }
+
+.mb-0 {
+  margin-bottom: 0em; }
+
 .p-1 {
   padding: 0.5em; }
 
@@ -1178,6 +1262,48 @@ textarea {
 
 /* Button such as text colors
 --------------------------------------------- */
+.p-0 {
+  padding: 0em; }
+
+.py-0 {
+  padding-top: 0em;
+  padding-bottom: 0em; }
+
+.px-0 {
+  padding-right: 0em;
+  padding-left: 0em; }
+
+.pt-0 {
+  padding-top: 0em; }
+
+.pr-0 {
+  padding-right: 0em; }
+
+.pb-0 {
+  padding-bottom: 0em; }
+
+.pl-0 {
+  padding-left: 0em; }
+
+.m-0 {
+  margin: 0em; }
+
+.mt-0 {
+  margin-top: 0em; }
+
+.mx-0 {
+  margin-right: 0em;
+  margin-left: 0em; }
+
+.mr-0 {
+  margin-right: 0em; }
+
+.ml-0 {
+  margin-left: 0em; }
+
+.mb-0 {
+  margin-bottom: 0em; }
+
 .p-1 {
   padding: 0.5em; }
 
@@ -1345,6 +1471,48 @@ textarea {
 
 .mb-4 {
   margin-bottom: 2em; }
+
+.p-0 {
+  padding: 0em; }
+
+.py-0 {
+  padding-top: 0em;
+  padding-bottom: 0em; }
+
+.px-0 {
+  padding-right: 0em;
+  padding-left: 0em; }
+
+.pt-0 {
+  padding-top: 0em; }
+
+.pr-0 {
+  padding-right: 0em; }
+
+.pb-0 {
+  padding-bottom: 0em; }
+
+.pl-0 {
+  padding-left: 0em; }
+
+.m-0 {
+  margin: 0em; }
+
+.mt-0 {
+  margin-top: 0em; }
+
+.mx-0 {
+  margin-right: 0em;
+  margin-left: 0em; }
+
+.mr-0 {
+  margin-right: 0em; }
+
+.ml-0 {
+  margin-left: 0em; }
+
+.mb-0 {
+  margin-bottom: 0em; }
 
 .p-1 {
   padding: 0.5em; }
@@ -1589,6 +1757,48 @@ button {
 
 /* Others such as text colors
 --------------------------------------------- */
+.p-0 {
+  padding: 0em; }
+
+.py-0 {
+  padding-top: 0em;
+  padding-bottom: 0em; }
+
+.px-0 {
+  padding-right: 0em;
+  padding-left: 0em; }
+
+.pt-0 {
+  padding-top: 0em; }
+
+.pr-0 {
+  padding-right: 0em; }
+
+.pb-0 {
+  padding-bottom: 0em; }
+
+.pl-0 {
+  padding-left: 0em; }
+
+.m-0 {
+  margin: 0em; }
+
+.mt-0 {
+  margin-top: 0em; }
+
+.mx-0 {
+  margin-right: 0em;
+  margin-left: 0em; }
+
+.mr-0 {
+  margin-right: 0em; }
+
+.ml-0 {
+  margin-left: 0em; }
+
+.mb-0 {
+  margin-bottom: 0em; }
+
 .p-1 {
   padding: 0.5em; }
 
@@ -1796,6 +2006,48 @@ table.table {
 
 #prototypeContainer {
   display: none; }
+
+.p-0 {
+  padding: 0em; }
+
+.py-0 {
+  padding-top: 0em;
+  padding-bottom: 0em; }
+
+.px-0 {
+  padding-right: 0em;
+  padding-left: 0em; }
+
+.pt-0 {
+  padding-top: 0em; }
+
+.pr-0 {
+  padding-right: 0em; }
+
+.pb-0 {
+  padding-bottom: 0em; }
+
+.pl-0 {
+  padding-left: 0em; }
+
+.m-0 {
+  margin: 0em; }
+
+.mt-0 {
+  margin-top: 0em; }
+
+.mx-0 {
+  margin-right: 0em;
+  margin-left: 0em; }
+
+.mr-0 {
+  margin-right: 0em; }
+
+.ml-0 {
+  margin-left: 0em; }
+
+.mb-0 {
+  margin-bottom: 0em; }
 
 .p-1 {
   padding: 0.5em; }
@@ -2146,6 +2398,9 @@ a.text-black {
 .text-nowrap {
   white-space: nowrap; }
 
+.float-right {
+  float: right; }
+
 .font-weight-bold {
   font-weight: bold; }
 
@@ -2199,7 +2454,6 @@ input.search-icon:before {
   background-color: #0000009e;
   padding-top: 10%; }
   .modal .modal-body {
-    min-width: 500px;
     width: 500px;
     height: auto;
     min-height: 200px;

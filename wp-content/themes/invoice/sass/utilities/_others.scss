@@ -49,6 +49,9 @@
 .text-nowrap {
   white-space: nowrap
 }
+.float-right {
+  float: right
+}
 .font-weight-bold {
   font-weight: bold
 }
@@ -106,7 +109,6 @@ input.search-icon:before {
   // justify-content: center;
 
   .modal-body {
-    min-width: 500px;
     width: 500px;
     height: auto;
     min-height: 200px;
