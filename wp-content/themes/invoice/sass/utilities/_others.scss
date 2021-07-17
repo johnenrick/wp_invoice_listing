@@ -92,3 +92,27 @@ input.search-icon:before {
   -moz-osx-font-smoothing: grayscale;
   color: #72aee6;
 }
+
+/* Modal */
+.modal {
+  top: 0;
+  left: 0;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background-color: #0000009e;
+  padding-top: 10%;
+
+  // justify-content: center;
+
+  .modal-body {
+    min-width: 500px;
+    width: 500px;
+    height: auto;
+    min-height: 200px;
+    background: white;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: $default-border-radius;
+  }
+}

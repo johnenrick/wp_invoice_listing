@@ -85,7 +85,7 @@ get_header();
 			</table>
 		</div>
 		<div class="modal">
-			<div class="moday-body">Modal Body</div>
+			<div class="modal-body">Modal Body</div>
 		</div>
 	</main><!-- #main -->
 	<script >
