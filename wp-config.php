@@ -20,13 +20,13 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'wp_invoice_listing' );
+define( 'DB_NAME', 'u740202873_wp_invoice_lis' );
 
 /** MySQL database username */
-define( 'DB_USER', 'root' );
+define( 'DB_USER', 'u740202873_invoice' );
 
 /** MySQL database password */
-define( 'DB_PASSWORD', 'root' );
+define( 'DB_PASSWORD', 'Fa1IbhG^' );
 
 /** MySQL hostname */
 define( 'DB_HOST', 'localhost' );
