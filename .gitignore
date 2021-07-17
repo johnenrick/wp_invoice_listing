@@ -7,8 +7,8 @@ wp-content/*
 !wp-content/mu-plugins/
 !wp-content/plugins/
 !wp-content/themes/
+#ignore sass cache
 wp-content/themes/invoice/.sass-cache/*
-
 # ignore these plugins
 wp-content/plugins/hello.php
 

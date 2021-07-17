@@ -357,9 +357,8 @@ get_header();
 				$('.markInvoice').attr('checked', $(this).prop('checked'));
 			})
 			$('#markAsPaid').click(function(){
-				console.log($('.markInvoice:checked').length)
 				var invoiceIds = []
-				$('.markInvoice:checked').each(function(){
+				$('#invoiceTable .markInvoice:checked').each(function(){
 					invoiceIds.push($(this).val())
 				})
 				if(invoiceIds.length){
@@ -401,7 +400,8 @@ get_header();
 							$('.invoiceRow[invoice_id="' + invoiceId + '"] .statusColumn .badge').text('Paid')
 						})
 					}
-					$('.markInvoice').attr('checked', false);
+					$('.markInvoice').prop('checked', false);
+					$('#markAllInvoice').prop('checked', false)
 					$('#markAsPaid').attr('disabled', false)
 			})
 		}
