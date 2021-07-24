@@ -277,7 +277,8 @@ body {
   background-color: #f7f8fa; }
 
 .site-main {
-  max-width: 1760px; }
+  max-width: 1760px;
+  margin: 0 auto; }
 
 footer {
   display: none; }
@@ -1701,7 +1702,8 @@ body {
   background-color: #f7f8fa; }
 
 .site-main {
-  max-width: 1760px; }
+  max-width: 1760px;
+  margin: 0 auto; }
 
 footer {
   display: none; }
@@ -1986,7 +1988,8 @@ body {
   background-color: #f7f8fa; }
 
 .site-main {
-  max-width: 1760px; }
+  max-width: 1760px;
+  margin: 0 auto; }
 
 footer {
   display: none; }
