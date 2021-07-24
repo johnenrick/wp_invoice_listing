@@ -20,11 +20,11 @@ get_header();
 				<span class="statusFilter badge text-primary2 mx-1 c-pointer" status="application-status-pending" >Pending</span>
 			</div>
 			<div class="d-flex">
-				<div class="bg-white border pl-1 mr-1">
+				<div class="bg-white border pl-1 mr-1 text-nowrap">
 					<i class="fas fa-calendar"></i>
 					<input id="dateRangeFilter" name="dates" type="text" class="  border-none" size="22" style="width: auto" />
 				</div>
-				<div class="border bg-white mr-1 pl-1">
+				<div class="border bg-white mr-1 pl-1 text-nowrap">
 					<i class="fas fa-search"></i>
 					<input id="searchBox" class="search-icon text-primary border-none" type="text" placeholder="Search" >
 				</div>
