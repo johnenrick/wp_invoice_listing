@@ -1077,6 +1077,9 @@ textarea {
 .flex-fill-2 {
   flex-grow: 1.5; }
 
+@media only screen and (max-width: 768px) {
+  .sm-flex-wrap {
+    flex-wrap: wrap; } }
 /* Spacing such as text colors
 --------------------------------------------- */
 .p-0 {
@@ -2546,34 +2549,30 @@ input {
   background-color: transparent;
   padding-left: 0.5em !important; }
 
-input.search-icon:before {
-  position: absolute;
-  top: 6px;
-  left: 5px;
-  z-index: 20;
-  font: normal 20px/1 dashicons !important;
-  content: "\f179";
-  speak: never;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #72aee6; }
+.modal-open {
+  overflow: hidden; }
 
 /* Modal */
 .modal {
   top: 0;
   left: 0;
   position: absolute;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   background-color: #0000009e;
   padding-top: 10%; }
   .modal .modal-body {
     width: 500px;
+    max-width: 90vw;
     height: auto;
     min-height: 200px;
     background: white;
     margin-left: auto;
     margin-right: auto;
     border-radius: 5px; }
+
+@media only screen and (max-width: 768px) {
+  .modal-open {
+    position: fixed; } }
 
 /*# sourceMappingURL=style.css.map */

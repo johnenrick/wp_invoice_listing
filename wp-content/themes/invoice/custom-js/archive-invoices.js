@@ -250,9 +250,11 @@ var $ = jQuery
 				$('#invoiceDetails').find('.status').text($(this).find('.statusColumn .badge').text())
 				$('#invoiceDetails').find('.status').attr('class', $(this).find('.statusColumn .badge').attr('class')).addClass('status')
 				$('#invoiceDetails').show();
+        $('body').addClass('modal-open');
 			})
 			$('#closeInvoiceDetails').click(function(){
 				$('#invoiceDetails').hide();
+				$('body').removeClass('modal-open');
 			})
 		}
 		function markAsPaid(invoiceIds){

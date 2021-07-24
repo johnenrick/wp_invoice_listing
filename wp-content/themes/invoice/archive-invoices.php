@@ -9,11 +9,10 @@
 
 get_header();
 ?>
-	<main id="primary" class="site-main">
+	<main id="primary" class="site-main overflow-hidden">
 		<h1 class="page-header">Invoices</h1>
-		
 		<div class="d-flex flex-wrap align-items-center justify-content-space-between ">
-			<div class="d-flex text-uppercase flex-fill mb-2 statusFilterContainer">
+			<div class="d-flex sm-d-flex-none  flex-fill mb-2 statusFilterContainer text-uppercase">
 				<span class="statusFilter flex-fill text-center badge badge-primary2 mx-1 c-pointer" status="application-status-all" >All</span>
 				<span class="statusFilter flex-fill text-center badge text-primary2 mx-1 c-pointer" status="application-status-ongoing" >Ongoing</span>
 				<span class="statusFilter flex-fill text-center badge text-primary2 mx-1 c-pointer" status="application-status-verified" >Verified</span>
