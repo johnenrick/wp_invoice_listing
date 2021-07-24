@@ -47,4 +47,9 @@ $spacing-4: 0.5em * 4;
   .mb-#{$i} {
     margin-bottom: ($spacing-1 * $i);
   }
+  @media only screen and (max-width: 768px)  { // for small
+    .sm-mr-#{$i} {
+      margin-right: ($spacing-1 * $i)!important;
+    }
+  }
 }

@@ -9,38 +9,38 @@
 
 get_header();
 ?>
-	<main id="primary" class="site-main p-4">
+	<main id="primary" class="site-main">
 		<h1 class="page-header">Invoices</h1>
 		
-		<div class="d-flex align-items-center justify-content-space-between mb-2">
-			<div class="text-uppercase">
-				<span class="statusFilter badge badge-primary2 mx-1 c-pointer" status="application-status-all" >All</span>
-				<span class="statusFilter badge text-primary2 mx-1 c-pointer" status="application-status-ongoing" >Ongoing</span>
-				<span class="statusFilter badge text-primary2 mx-1 c-pointer" status="application-status-verified" >Verified</span>
-				<span class="statusFilter badge text-primary2 mx-1 c-pointer" status="application-status-pending" >Pending</span>
+		<div class="d-flex flex-wrap align-items-center justify-content-space-between ">
+			<div class="d-flex text-uppercase flex-fill mb-2 statusFilterContainer">
+				<span class="statusFilter flex-fill text-center badge badge-primary2 mx-1 c-pointer" status="application-status-all" >All</span>
+				<span class="statusFilter flex-fill text-center badge text-primary2 mx-1 c-pointer" status="application-status-ongoing" >Ongoing</span>
+				<span class="statusFilter flex-fill text-center badge text-primary2 mx-1 c-pointer" status="application-status-verified" >Verified</span>
+				<span class="statusFilter flex-fill text-center badge text-primary2 mx-1 c-pointer" status="application-status-pending" >Pending</span>
 			</div>
-			<div class="d-flex">
-				<div class="bg-white border pl-1 mr-1 text-nowrap">
+			<div class="d-flex flex-wrap flex-fill dateSearchFilterContainer">
+				<div class="border bg-white flex-fill pl-1 sm-mr-0 mr-1 text-nowrap mb-2">
 					<i class="fas fa-calendar"></i>
 					<input id="dateRangeFilter" name="dates" type="text" class="  border-none" size="22" style="width: auto" />
 				</div>
-				<div class="border bg-white mr-1 pl-1 text-nowrap">
+				<div class="border bg-white flex-fill sm-mr-0 mr-1 pl-1 text-nowrap mb-2">
 					<i class="fas fa-search"></i>
 					<input id="searchBox" class="search-icon text-primary border-none" type="text" placeholder="Search" >
 				</div>
-				<button id="markAsPaid" class="btn btn-warning text-nowrap" >Mark As Paid</button>
+				<button id="markAsPaid" class="btn btn-warning text-nowrap mb-2 flex-fill" >Mark As Paid</button>
 			</div>
 		</div>
 		<div class="table-responsive">
 			<table id="invoiceTable" class="table bg-white">
 				<thead class="bg-white">
 					<tr class="border-bottom">
-						<th class="text-center"><input id="markAllInvoice" type="checkbox" value="all" /></th>
-						<th class="text-center">ID</th>
-						<th>Restaurant</th>
+						<th class="text-center text-nowrap"><input id="markAllInvoice" type="checkbox" value="all" /></th>
+						<th class="text-center text-nowrap">ID</th>
+						<th class="text-nowrap">Restaurant</th>
 						<th>Status</th>
-						<th>Start Date</th>
-						<th>End Date</th>
+						<th class="text-nowrap">Start Date</th>
+						<th class="text-nowrap">End Date</th>
 						<th>Total</th>
 						<th>Fees</th>
 						<th>Transfer</th>
@@ -126,6 +126,16 @@ get_header();
 			</div>
 		</div>
 	</main><!-- #main -->
+	<style>
+		@media only screen and (min-width: 926px)  {
+			.statusFilterContainer {
+				max-width: 300px;
+			}
+			.dateSearchFilterContainer {
+				flex-grow: 0!important;
+			}
+		}
+	</style>
 <?php
 get_sidebar();
 get_footer();

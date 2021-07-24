@@ -90,6 +90,9 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 .mb-0 {
   margin-bottom: 0em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-0 {
+    margin-right: 0em !important; } }
 .p-1 {
   padding: 0.5em; }
 
@@ -132,6 +135,9 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 .mb-1 {
   margin-bottom: 0.5em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-1 {
+    margin-right: 0.5em !important; } }
 .p-2 {
   padding: 1em; }
 
@@ -174,6 +180,9 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 .mb-2 {
   margin-bottom: 1em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-2 {
+    margin-right: 1em !important; } }
 .p-3 {
   padding: 1.5em; }
 
@@ -216,6 +225,9 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 .mb-3 {
   margin-bottom: 1.5em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-3 {
+    margin-right: 1.5em !important; } }
 .p-4 {
   padding: 2em; }
 
@@ -258,6 +270,9 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 .mb-4 {
   margin-bottom: 2em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-4 {
+    margin-right: 2em !important; } }
 /* Layout: Header, Body, Footer*/
 .menu.nav-menu .menu-item a {
   color: white; }
@@ -278,8 +293,12 @@ body {
 
 .site-main {
   max-width: 1760px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding: 2em; }
 
+@media only screen and (max-width: 768px) {
+  .site-main {
+    padding: 1em !important; } }
 footer {
   display: none; }
 
@@ -1049,6 +1068,15 @@ textarea {
 .justify-content-space-between {
   justify-content: space-between; }
 
+.flex-wrap {
+  flex-wrap: wrap; }
+
+.flex-fill {
+  flex-grow: 1; }
+
+.flex-fill-2 {
+  flex-grow: 1.5; }
+
 /* Spacing such as text colors
 --------------------------------------------- */
 .p-0 {
@@ -1093,6 +1121,9 @@ textarea {
 .mb-0 {
   margin-bottom: 0em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-0 {
+    margin-right: 0em !important; } }
 .p-1 {
   padding: 0.5em; }
 
@@ -1135,6 +1166,9 @@ textarea {
 .mb-1 {
   margin-bottom: 0.5em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-1 {
+    margin-right: 0.5em !important; } }
 .p-2 {
   padding: 1em; }
 
@@ -1177,6 +1211,9 @@ textarea {
 .mb-2 {
   margin-bottom: 1em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-2 {
+    margin-right: 1em !important; } }
 .p-3 {
   padding: 1.5em; }
 
@@ -1219,6 +1256,9 @@ textarea {
 .mb-3 {
   margin-bottom: 1.5em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-3 {
+    margin-right: 1.5em !important; } }
 .p-4 {
   padding: 2em; }
 
@@ -1261,6 +1301,9 @@ textarea {
 .mb-4 {
   margin-bottom: 2em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-4 {
+    margin-right: 2em !important; } }
 /* Button such as text colors
 --------------------------------------------- */
 .p-0 {
@@ -1305,6 +1348,9 @@ textarea {
 .mb-0 {
   margin-bottom: 0em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-0 {
+    margin-right: 0em !important; } }
 .p-1 {
   padding: 0.5em; }
 
@@ -1347,6 +1393,9 @@ textarea {
 .mb-1 {
   margin-bottom: 0.5em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-1 {
+    margin-right: 0.5em !important; } }
 .p-2 {
   padding: 1em; }
 
@@ -1389,6 +1438,9 @@ textarea {
 .mb-2 {
   margin-bottom: 1em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-2 {
+    margin-right: 1em !important; } }
 .p-3 {
   padding: 1.5em; }
 
@@ -1431,6 +1483,9 @@ textarea {
 .mb-3 {
   margin-bottom: 1.5em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-3 {
+    margin-right: 1.5em !important; } }
 .p-4 {
   padding: 2em; }
 
@@ -1473,6 +1528,9 @@ textarea {
 .mb-4 {
   margin-bottom: 2em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-4 {
+    margin-right: 2em !important; } }
 .p-0 {
   padding: 0em; }
 
@@ -1515,6 +1573,9 @@ textarea {
 .mb-0 {
   margin-bottom: 0em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-0 {
+    margin-right: 0em !important; } }
 .p-1 {
   padding: 0.5em; }
 
@@ -1557,6 +1618,9 @@ textarea {
 .mb-1 {
   margin-bottom: 0.5em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-1 {
+    margin-right: 0.5em !important; } }
 .p-2 {
   padding: 1em; }
 
@@ -1599,6 +1663,9 @@ textarea {
 .mb-2 {
   margin-bottom: 1em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-2 {
+    margin-right: 1em !important; } }
 .p-3 {
   padding: 1.5em; }
 
@@ -1641,6 +1708,9 @@ textarea {
 .mb-3 {
   margin-bottom: 1.5em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-3 {
+    margin-right: 1.5em !important; } }
 .p-4 {
   padding: 2em; }
 
@@ -1683,6 +1753,9 @@ textarea {
 .mb-4 {
   margin-bottom: 2em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-4 {
+    margin-right: 2em !important; } }
 /* Layout: Header, Body, Footer*/
 .menu.nav-menu .menu-item a {
   color: white; }
@@ -1703,8 +1776,12 @@ body {
 
 .site-main {
   max-width: 1760px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding: 2em; }
 
+@media only screen and (max-width: 768px) {
+  .site-main {
+    padding: 1em !important; } }
 footer {
   display: none; }
 
@@ -1801,6 +1878,9 @@ button {
 .mb-0 {
   margin-bottom: 0em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-0 {
+    margin-right: 0em !important; } }
 .p-1 {
   padding: 0.5em; }
 
@@ -1843,6 +1923,9 @@ button {
 .mb-1 {
   margin-bottom: 0.5em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-1 {
+    margin-right: 0.5em !important; } }
 .p-2 {
   padding: 1em; }
 
@@ -1885,6 +1968,9 @@ button {
 .mb-2 {
   margin-bottom: 1em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-2 {
+    margin-right: 1em !important; } }
 .p-3 {
   padding: 1.5em; }
 
@@ -1927,6 +2013,9 @@ button {
 .mb-3 {
   margin-bottom: 1.5em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-3 {
+    margin-right: 1.5em !important; } }
 .p-4 {
   padding: 2em; }
 
@@ -1969,6 +2058,9 @@ button {
 .mb-4 {
   margin-bottom: 2em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-4 {
+    margin-right: 2em !important; } }
 /* Layout: Header, Body, Footer*/
 .menu.nav-menu .menu-item a {
   color: white; }
@@ -1989,8 +2081,12 @@ body {
 
 .site-main {
   max-width: 1760px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding: 2em; }
 
+@media only screen and (max-width: 768px) {
+  .site-main {
+    padding: 1em !important; } }
 footer {
   display: none; }
 
@@ -2052,6 +2148,9 @@ table.table {
 .mb-0 {
   margin-bottom: 0em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-0 {
+    margin-right: 0em !important; } }
 .p-1 {
   padding: 0.5em; }
 
@@ -2094,6 +2193,9 @@ table.table {
 .mb-1 {
   margin-bottom: 0.5em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-1 {
+    margin-right: 0.5em !important; } }
 .p-2 {
   padding: 1em; }
 
@@ -2136,6 +2238,9 @@ table.table {
 .mb-2 {
   margin-bottom: 1em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-2 {
+    margin-right: 1em !important; } }
 .p-3 {
   padding: 1.5em; }
 
@@ -2178,6 +2283,9 @@ table.table {
 .mb-3 {
   margin-bottom: 1.5em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-3 {
+    margin-right: 1.5em !important; } }
 .p-4 {
   padding: 2em; }
 
@@ -2220,6 +2328,9 @@ table.table {
 .mb-4 {
   margin-bottom: 2em; }
 
+@media only screen and (max-width: 768px) {
+  .sm-mr-4 {
+    margin-right: 2em !important; } }
 .bg-primary {
   background-color: #191919; }
 

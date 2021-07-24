@@ -40,6 +40,12 @@ body {
 .site-main {
   max-width: 1760px;
   margin: 0 auto;
+  padding: $spacing-1 * 4;
+}
+@media only screen and (max-width: 768px)  {
+  .site-main {
+    padding: $spacing-1 * 2!important;
+  }
 }
 footer {
   display: none;
