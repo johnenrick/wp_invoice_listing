@@ -144,7 +144,7 @@ function invoice_scripts() {
 	wp_style_add_data( 'invoice-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'invoice-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
-	wp_enqueue_script( 'jquery', get_template_directory_uri() . '/js/jquery-3.6.0.min.js', array( 'jquery' ), '3.6.0', true );
+	// wp_enqueue_script( 'jquery', get_template_directory_uri() . '/js/jquery-3.6.0.min.js', array( 'jquery' ), '3.6.0', true );
 	wp_enqueue_style( 'wpb-fa', get_stylesheet_directory_uri() . '/style/all.css' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -153,6 +153,7 @@ function invoice_scripts() {
 	if( is_archive('invoices') ){
 		wp_enqueue_script('momentjs', get_template_directory_uri() . '/js/moment.min.js', array('jquery'), '', false);
 		wp_enqueue_script('daterangepicker', get_template_directory_uri() . '/js/daterangepicker.js', array('jquery'), '', false);
+		wp_enqueue_script('archive-invoices', get_template_directory_uri() . '/custom-js/archive-invoices.js', array('jquery'), '', false);
 		wp_enqueue_style( 'daterangepicker-style', get_template_directory_uri() . '/style/daterangepicker.css', array(), _S_VERSION );
 	} 
 }
